@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "gyoku/version"
 
 Gem::Specification.new do |s|
-  s.name = "gyoku"
+  s.name = "chef-gyoku"
   s.version = Gyoku::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = "Daniel Harrington"
