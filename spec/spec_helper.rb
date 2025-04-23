@@ -11,5 +11,5 @@ unless RUBY_PLATFORM.match?(/java/)
   end
 end
 
-require "gyoku"
+require "chef-gyoku"
 require "rspec"

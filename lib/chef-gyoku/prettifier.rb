@@ -1,4 +1,4 @@
-require "rexml/document"
+require "rexml/document" unless defined?(REXML::Document)
 
 module Gyoku
   class Prettifier
