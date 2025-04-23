@@ -1,5 +1,5 @@
 $:.push File.expand_path("lib", __dir__)
-require "gyoku/version"
+require "chef-gyoku/version"
 
 Gem::Specification.new do |s|
   s.name = "chef-gyoku"

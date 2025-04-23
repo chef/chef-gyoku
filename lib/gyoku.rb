@@ -1,4 +1,4 @@
-require "gyoku/version"
+require "chef-gyoku/version"
 require "gyoku/hash"
 
 module Gyoku
