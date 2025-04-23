@@ -1,22 +1,22 @@
 module Gyoku
   module XMLKey
     class << self
-      CAMELCASE = lambda { |key| key.gsub(/\/(.?)/) { |m| "::#{m[-1].upcase}" }.gsub(/(?:^|_)(.)/) { |m| m[-1].upcase } }
+      CAMELCASE = lambda { |key| key.gsub(%r{/(.?)}) { |m| "::#{m[-1].upcase}" }.gsub(/(?:^|_)(.)/) { |m| m[-1].upcase } }
       LOWER_CAMELCASE = lambda { |key| key[0].chr.downcase + CAMELCASE.call(key)[1..] }
-      UPCASE = lambda { |key| key.upcase }
+      UPCASE = lambda(&:upcase)
 
       FORMULAS = {
         lower_camelcase: lambda { |key| LOWER_CAMELCASE.call(key) },
         camelcase: lambda { |key| CAMELCASE.call(key) },
         upcase: lambda { |key| UPCASE.call(key) },
-        none: lambda { |key| key }
-      }
+        none: lambda { |key| key },
+      }.freeze
 
       # Converts a given +object+ with +options+ to an XML key.
       def create(key, options = {})
         xml_key = chop_special_characters key.to_s
 
-        if unqualified = unqualify?(xml_key)
+        if unqualified == unqualify?(xml_key)
           xml_key = xml_key.split(":").last
         end
 
@@ -37,14 +37,14 @@ module Gyoku
 
         defined_key = options[:key_to_convert]
         key_converter = if !defined_key.nil? && (defined_key == xml_key)
-          options[:key_converter]
-        elsif !defined_key.nil?
-          :lower_camelcase
-        elsif options[:except] == xml_key
-          :lower_camelcase
-        else
-          options[:key_converter] || :lower_camelcase
-        end
+                          options[:key_converter]
+                        elsif !defined_key.nil?
+                          :lower_camelcase
+                        elsif options[:except] == xml_key
+                          :lower_camelcase
+                        else
+                          options[:key_converter] || :lower_camelcase
+                        end
         FORMULAS[key_converter]
       end
 

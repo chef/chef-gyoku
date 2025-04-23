@@ -46,7 +46,7 @@ describe Gyoku::XMLValue do
     end
 
     it "hash objects get converted to xml" do
-      object = {document!: {"@version" => "2.0", :content! => {key!: "value", other_key: {"@attribute" => "value", :content! => {key: "value"}}}}}
+      object = { document!: { "@version" => "2.0", :content! => { key!: "value", other_key: { "@attribute" => "value", :content! => { key: "value" } } } } }
       expect(create(object)).to eq("<document version=\"2.0\"><key>value</key><otherKey attribute=\"value\"><key>value</key></otherKey></document>")
     end
 

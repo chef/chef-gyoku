@@ -1,17 +1,17 @@
-require "cgi"
+require "cgi" unless defined?(CGI)
 require "date"
 
 module Gyoku
   module XMLValue
     class << self
       # xs:date format
-      XS_DATE_FORMAT = "%Y-%m-%d"
+      XS_DATE_FORMAT = "%Y-%m-%d".freeze
 
       # xs:time format
-      XS_TIME_FORMAT = "%H:%M:%S"
+      XS_TIME_FORMAT = "%H:%M:%S".freeze
 
       # xs:dateTime format
-      XS_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S%Z"
+      XS_DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S%Z".freeze
 
       # Converts a given +object+ to an XML value.
       def create(object, escape_xml = true, options = {})

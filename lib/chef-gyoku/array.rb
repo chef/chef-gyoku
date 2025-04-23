@@ -2,7 +2,7 @@ module Gyoku
   module Array
     module_function
 
-    NESTED_ELEMENT_NAME = "element"
+    NESTED_ELEMENT_NAME = "element".freeze
 
     # Builds XML and prettifies it if +pretty_print+ option is set to +true+
     def to_xml(array, key, escape_xml = true, attributes = {}, options = {})
@@ -64,13 +64,13 @@ module Gyoku
     def iterate_array(xml, array, attributes, &block)
       array.each_with_index do |item, index|
         attrs = if item.respond_to?(:keys)
-          item.each_with_object({}) do |v, st|
-            k = v[0].to_s
-            st[k[1..]] = v[1].to_s if Hash.explicit_attribute?(k)
-          end
-        else
-          {}
-        end
+                  item.each_with_object({}) do |v, st|
+                    k = v[0].to_s
+                    st[k[1..]] = v[1].to_s if Hash.explicit_attribute?(k)
+                  end
+                else
+                  {}
+                end
         yield xml, item, tag_attributes(attributes, index).merge(attrs), index
       end
     end
