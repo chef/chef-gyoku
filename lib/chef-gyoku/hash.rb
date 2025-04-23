@@ -1,8 +1,8 @@
 require "builder"
-require "gyoku/prettifier"
-require "gyoku/array"
-require "gyoku/xml_key"
-require "gyoku/xml_value"
+require "chef-gyoku/prettifier"
+require "chef-gyoku/array"
+require "chef-gyoku/xml_key"
+require "chef-gyoku/xml_value"
 
 module Gyoku
   module Hash

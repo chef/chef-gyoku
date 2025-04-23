@@ -1,5 +1,5 @@
 require "chef-gyoku/version"
-require "gyoku/hash"
+require "chef-gyoku/hash"
 
 module Gyoku
   # Converts a given Hash +key+ with +options+ into an XML tag.
