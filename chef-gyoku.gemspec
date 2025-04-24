@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/savonrb/#{s.name}"
   s.summary = "Translates Ruby Hashes to XML"
   s.description = "Gyoku translates Ruby Hashes to XML"
-  s.required_ruby_version = ">= 3.0" # setting the Ruby version requirement to 3.0 or higher to be backwards compatible with Inspec v 5.0.0
+  s.required_ruby_version = ">= 3.0" # setting the Ruby version requirement to 3.0 or higher to be backwards compatible with Inspec v 5.0.0 and AIX
 
   s.license = "MIT"
 
