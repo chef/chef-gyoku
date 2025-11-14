@@ -149,31 +149,29 @@ Use these labels when creating PRs or issues:
    ```
 
 #### PR Description Format:
-Use HTML formatting for PR descriptions:
+Use Markdown formatting for PR descriptions:
 
-```html
-<h2>Summary</h2>
-<p>Brief description of changes made.</p>
+```markdown
+## Summary
+Brief description of changes made.
 
-<h2>Changes Made</h2>
-<ul>
-<li>Added XML namespace support for nested hashes</li>
-<li>Updated hash conversion logic in <code>lib/chef-gyoku/hash.rb</code></li>
-<li>Added comprehensive test coverage in <code>spec/chef-gyoku/hash_spec.rb</code></li>
-</ul>
+## Changes Made
+- Added XML namespace support for nested hashes
+- Updated hash conversion logic in `lib/chef-gyoku/hash.rb`
+- Added comprehensive test coverage in `spec/chef-gyoku/hash_spec.rb`
 
-<h2>Testing</h2>
-<ul>
-<li>All existing tests pass</li>
-<li>New tests added for namespace functionality</li>
-<li>Coverage maintained above 80%</li>
-</ul>
+## Testing
+- All existing tests pass
+- New tests added for namespace functionality
+- Coverage maintained above 80%
 
-<h2>Jira Issue</h2>
-<p>Resolves: <a href="https://issues.chef.io/browse/CHEF-1234">CHEF-1234</a></p>
+## Jira Issue
+Resolves: [CHEF-1234](https://issues.chef.io/browse/CHEF-1234)
 
-<h2>DCO</h2>
-<p>All commits signed off with DCO compliance.</p>
+## DCO
+All commits signed off with DCO compliance.
+
+This work was completed with AI assistance following Progress AI policies.
 ```
 
 ### 7. Prompt-Based Development Process
