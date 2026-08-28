@@ -7,15 +7,15 @@ Gyoku.xml(:find_user => { :id => 123, "v1:Key" => "api" })
 # => "<findUser><id>123</id><v1:Key>api</v1:Key></findUser>"
 ```
 
-[![Build status](https://github.com/savonrb/gyoku/actions/workflows/ci.yml/badge.svg)](https://github.com/savonrb/gyoku/actions/workflows/ci.yml)
-[![Gem Version](https://badge.fury.io/rb/gyoku.svg)](http://badge.fury.io/rb/gyoku)
-[![Code Climate](https://codeclimate.com/github/savonrb/gyoku.svg)](https://codeclimate.com/github/savonrb/gyoku)
-[![Coverage Status](https://coveralls.io/repos/savonrb/gyoku/badge.svg?branch=master)](https://coveralls.io/r/savonrb/gyoku)
+[![CI](https://github.com/chef/chef-gyoku/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/chef/chef-gyoku/actions/workflows/ci.yml)
+[![Gem Version](https://img.shields.io/gem/v/chef-gyoku.svg)](https://rubygems.org/gems/chef-gyoku)
+[![Coverage Status](https://coveralls.io/repos/github/chef/chef-gyoku/badge.svg?branch=main)](https://coveralls.io/github/chef/chef-gyoku?branch=main)
+[![License](https://img.shields.io/github/license/chef/chef-gyoku.svg)](MIT-LICENSE)
 
 
 ## Installation
 
-Gyoku is available through [Rubygems](http://rubygems.org/gems/gyoku) and can be installed via:
+Gyoku is available through [Rubygems](https://rubygems.org/gems/gyoku) and can be installed via:
 
 ``` bash
 $ gem install gyoku
@@ -50,9 +50,11 @@ This is a great way to leverage active support inflections for domain specific a
 
 ``` ruby
 # Use camelize lower which will hook into active support if installed.
+# Register the acronym so the inflector preserves its casing.
+ActiveSupport::Inflector.inflections { |inflect| inflect.acronym "ABC" }
+
 Gyoku.xml({ acronym_abc: "value" }, key_converter: lambda { |key| key.camelize(:lower) })
 # => "<acronymABC>value</acronymABC>"
-
 ```
 
 Hash key Strings are not converted and may contain namespaces.
@@ -77,14 +79,14 @@ Gyoku.xml("XML" => "key")
 Array items are by default wrapped with the containiner tag, which may be unexpected.
 
 ``` ruby
-> Gyoku.xml({languages: [{language: 'ruby'},{language: 'java'}]})
+Gyoku.xml({languages: [{language: 'ruby'},{language: 'java'}]})
 # => "<languages><language>ruby</language></languages><languages><language>java</language></languages>"
 ```
 
 You can set the `unwrap` option to remove this behavior.
 
 ``` ruby
-> Gyoku.xml({languages: [{language: 'ruby'},{language: 'java'}]}, { unwrap: true})
+Gyoku.xml({languages: [{language: 'ruby'},{language: 'java'}]}, { unwrap: true})
 # => "<languages><language>ruby</language><language>java</language></languages>"
 ```
 
@@ -150,7 +152,7 @@ Gyoku.xml(
     }
   }
 )
-# => "<foo baz=\"3\" bar=\"1\" biz=\"2\"/>"
+# => "<foo bar=\"1\" biz=\"2\" baz=\"3\"/>"
 ```
 
 **Using "@" keys and ":content!"**
@@ -163,7 +165,7 @@ Gyoku.xml(
     :@baz => "3",
     :content! => ""
   })
-# => "<foo baz=\"3\" bar=\"1\" biz=\"2\"/>"
+# => "<foo bar=\"1\" biz=\"2\" baz=\"3\"/>"
 ```
 
 **Example using "@" to get Array of parent tags each with @attributes & :content!**
@@ -171,7 +173,7 @@ Gyoku.xml(
 ``` ruby
 Gyoku.xml(
   "foo" => [
-    {:@name => "bar", :content! => 'gyoku'}
+    {:@name => "bar", :content! => 'gyoku'},
     {:@name => "baz", :@some => "attr", :content! => 'rocks!'}
   ])
 # => "<foo name=\"bar\">gyoku</foo><foo name=\"baz\" some=\"attr\">rocks!</foo>"
@@ -218,7 +220,7 @@ Naturally, it would ignore :content! if tag is self-closing:
 ``` ruby
 Gyoku.xml(
   "foo/" => [
-    {:@name => "bar", :content! => 'gyoku'}
+    {:@name => "bar", :content! => 'gyoku'},
     {:@name => "baz", :@some => "attr", :content! => 'rocks!'}
   ])
 # => "<foo name=\"bar\"/><foo name=\"baz\" some=\"attr\"/>"
@@ -230,21 +232,21 @@ For backward compatibility, `:attributes!` will still work. However, "@" keys wi
 if there is a conflict.
 
 ``` ruby
-Gyoku.xml(:person => {:content! => "Adam", :@id! => 0})
+Gyoku.xml(:person => {:content! => "Adam", :@id => 0})
 # => "<person id=\"0\">Adam</person>"
 ```
 
 **Example with ":content!", :attributes! and "@" keys**
 
 ``` ruby
-Gyoku.xml({ 
-  :subtitle => { 
-    :@lang => "en", 
-    :content! => "It's Godzilla!" 
-  }, 
-  :attributes! => { :subtitle => { "lang" => "jp" } } 
-}
-# => "<subtitle lang=\"en\">It's Godzilla!</subtitle>"
+Gyoku.xml({
+  :subtitle => {
+    :@lang => "en",
+    :content! => "It's Godzilla!"
+  },
+  :attributes! => { :subtitle => { "lang" => "jp" } }
+})
+# => "<subtitle lang=\"en\">It&#39;s Godzilla!</subtitle>"
 ```
 
 The example above shows an example of how you can use all three at the same time. 
@@ -311,3 +313,10 @@ puts Gyoku::Array.to_xml(["john", "jane"], "user", true, {}, pretty_print: true,
 puts Gyoku::Array.to_xml(["john", "jane"], "user", true, {}, pretty_print: true)
 #<user>john</user><user>jane</user>
 ```
+
+
+## License
+
+Gyoku is released under the [MIT License](MIT-LICENSE).
+
+Copyright (c) 2010 Daniel Harrington
