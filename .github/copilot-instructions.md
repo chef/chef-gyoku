@@ -10,7 +10,7 @@ The `chef-gyoku` repository is a Ruby gem that translates Ruby Hashes to XML. Th
 chef-gyoku/
 ├── .github/
 │   ├── workflows/
-│   │   ├── ci.yml                    # CI pipeline for Ruby 3.1 & 3.4
+│   │   ├── ci.yml                    # CI pipeline for all supported Ruby versions
 │   │   └── lint.yml                  # Cookstyle linting workflow
 │   ├── dependabot.yml               # Dependency management
 │   └── copilot-instructions.md      # This file
@@ -98,8 +98,8 @@ Signed-off-by: Developer Name <dev@example.com>"
 The repository uses GitHub Actions workflows:
 
 #### CI Pipeline (`ci.yml`):
-- **Trigger**: Push to master, all PRs
-- **Ruby Versions**: 3.1, 3.4
+- **Trigger**: Push to main, all PRs
+- **Ruby Versions**: 3.1, 3.2, 3.3, 3.4, 4.0 (every release allowed by `required_ruby_version`)
 - **Steps**: Checkout → Setup Ruby → Bundle install → Run tests
 - **Coverage**: Coveralls integration for coverage reporting
 
