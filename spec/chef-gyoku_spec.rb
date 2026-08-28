@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe Gyoku do
+RSpec.describe Gyoku do
   describe ".xml_tag" do
     it "translates Symbols to lowerCamelCase by default" do
       tag = Gyoku.xml_tag(:user_name)
@@ -17,7 +15,7 @@ describe Gyoku do
       expect(tag).to eq("USER_NAME")
     end
 
-    it "does not translates Strings with a given key_converter" do
+    it "does not translate Strings with a given key_converter" do
       tag = Gyoku.xml_tag("user_name", key_converter: :upcase)
       expect(tag).to eq("user_name")
     end
@@ -39,7 +37,7 @@ describe Gyoku do
       expect(xml).to include("<PASS_WORD>secret</PASS_WORD>")
     end
 
-    it "don't converts Strings keys" do
+    it "does not convert String keys" do
       hash = { :user_name => "finn", "pass_word" => "secret" }
       xml = Gyoku.xml(hash, { key_converter: :upcase })
 
@@ -47,7 +45,7 @@ describe Gyoku do
       expect(xml).to include("<pass_word>secret</pass_word>")
     end
 
-    it "when defined key_to_convert only convert this key" do
+    it "converts only the key named by key_to_convert" do
       hash = { user_name: "finn", pass_word: "secret" }
       options = { key_converter: :upcase, key_to_convert: "user_name" }
       xml = Gyoku.xml(hash, options)

@@ -61,7 +61,7 @@ When a Jira ID is provided in tasks:
 ### 2. Implementation Standards
 
 #### Code Quality Requirements
-- **Test Coverage**: Maintain > 80% test coverage at all times
+- **Test Coverage**: Cover new behavior with specs in `spec/`
 - **Code Style**: Follow Cookstyle standards (runs on CI via `cookstyle --chefstyle -c .rubocop.yml`)
 - **Ruby Version**: Support Ruby 3.1+ as specified in gemspec
 - **Dependencies**: Use only approved dependencies listed in gemspec
@@ -71,7 +71,6 @@ When a Jira ID is provided in tasks:
 - Use RSpec for testing framework
 - Place tests in appropriate `spec/` subdirectories matching `lib/` structure
 - Run tests with: `bundle exec rake spec`
-- Coverage reports generated via SimpleCov and Coveralls
 
 ### 3. DCO Compliance
 
@@ -101,7 +100,6 @@ The repository uses GitHub Actions workflows:
 - **Trigger**: Push to main, all PRs
 - **Ruby Versions**: 3.1, 3.2, 3.3, 3.4, 4.0 (every release allowed by `required_ruby_version`)
 - **Steps**: Checkout → Setup Ruby → Bundle install → Run tests
-- **Coverage**: Coveralls integration for coverage reporting
 
 #### Linting (`lint.yml`):
 - **Trigger**: PRs and push to main
@@ -163,7 +161,7 @@ Brief description of changes made.
 ## Testing
 - All existing tests pass
 - New tests added for namespace functionality
-- Coverage maintained above 80%
+- New behavior covered by specs
 
 ## Jira Issue
 Resolves: [CHEF-1234](https://issues.chef.io/browse/CHEF-1234)
@@ -196,8 +194,7 @@ All tasks should follow this prompt-based approach:
 
 4. **Testing Phase**
    - Write/update tests
-   - Verify coverage
-   - **Prompt**: "Implementation completed. Tests written and coverage verified at [X]%. Should I proceed with creating the PR?"
+   - **Prompt**: "Implementation completed and tests written. Should I proceed with creating the PR?"
 
 5. **PR Creation**
    - Create branch using Jira ID
@@ -232,8 +229,7 @@ All tasks should follow this prompt-based approach:
    ```bash
    bundle exec rake style
    ```
-3. **Verify Coverage**: Ensure coverage remains > 80%
-4. **Manual Testing**: Test the specific functionality implemented
+3. **Manual Testing**: Test the specific functionality implemented
 
 #### Test Structure:
 - Unit tests for all public methods

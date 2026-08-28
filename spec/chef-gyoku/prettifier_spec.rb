@@ -1,35 +1,35 @@
-require "spec_helper"
+RSpec.describe Gyoku::Prettifier do
+  subject { described_class.new(options) }
 
-describe Gyoku::Prettifier do
+  let(:options) { {} }
+
   describe "#prettify" do
     context "when xml is valid" do
-      let!(:xml) { Gyoku::Hash.build_xml(test: { pretty: "xml" }) }
+      let(:xml) { Gyoku::Hash.build_xml(test: { pretty: "xml" }) }
 
       it "returns prettified xml" do
-        expect(subject.prettify(xml)).to eql("<test>\n  <pretty>xml</pretty>\n</test>")
+        expect(subject.prettify(xml)).to eq("<test>\n  <pretty>xml</pretty>\n</test>")
       end
 
       context "when indent option is specified" do
+        let(:options) { { indent: 3 } }
+
         it "returns prettified xml with indent" do
-          options = { indent: 3 }
-          subject = Gyoku::Prettifier.new(options)
-          expect(subject.prettify(xml)).to eql("<test>\n   <pretty>xml</pretty>\n</test>")
+          expect(subject.prettify(xml)).to eq("<test>\n   <pretty>xml</pretty>\n</test>")
         end
       end
 
       context "when compact option is specified" do
-        it "returns prettified xml with indent" do
-          options = { compact: false }
-          subject = Gyoku::Prettifier.new(options)
-          expect(subject.prettify(xml)).to eql("<test>\n  <pretty>\n    xml\n  </pretty>\n</test>")
+        let(:options) { { compact: false } }
+
+        it "returns prettified xml without compacting text nodes" do
+          expect(subject.prettify(xml)).to eq("<test>\n  <pretty>\n    xml\n  </pretty>\n</test>")
         end
       end
     end
 
     context "when xml is not valid" do
-      let!(:xml) do
-        Gyoku::Array.build_xml(%w{one two}, "test")
-      end
+      let(:xml) { Gyoku::Array.build_xml(%w{one two}, "test") }
 
       it "raises an error" do
         expect { subject.prettify(xml) }.to raise_error REXML::ParseException

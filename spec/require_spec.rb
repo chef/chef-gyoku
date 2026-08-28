@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe "requiring chef-gyoku" do
+RSpec.describe "requiring chef-gyoku" do
   # Guards the deferred require in Gyoku::Prettifier#prettify. These run in a
   # subprocess because this one has already loaded REXML via the prettifier
   # specs.

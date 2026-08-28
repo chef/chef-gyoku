@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe Gyoku::Hash do
+RSpec.describe Gyoku::Hash do
   describe ".to_xml" do
     describe "returns SOAP request compatible XML" do
       it "for a simple Hash" do
