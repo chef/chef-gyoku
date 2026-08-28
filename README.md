@@ -9,7 +9,6 @@ Gyoku.xml(:find_user => { :id => 123, "v1:Key" => "api" })
 
 [![CI](https://github.com/chef/chef-gyoku/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/chef/chef-gyoku/actions/workflows/ci.yml)
 [![Gem Version](https://img.shields.io/gem/v/chef-gyoku.svg)](https://rubygems.org/gems/chef-gyoku)
-[![Coverage Status](https://coveralls.io/repos/github/chef/chef-gyoku/badge.svg?branch=main)](https://coveralls.io/github/chef/chef-gyoku?branch=main)
 [![License](https://img.shields.io/github/license/chef/chef-gyoku.svg)](MIT-LICENSE)
 
 
