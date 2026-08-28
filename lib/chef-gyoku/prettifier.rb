@@ -1,5 +1,3 @@
-require "rexml/document" unless defined?(REXML::Document)
-
 module Gyoku
   class Prettifier
     DEFAULT_INDENT = 2
@@ -18,6 +16,12 @@ module Gyoku
 
     # Adds intendations and newlines to +xml+ to make it more readable
     def prettify(xml)
+      # Loaded here rather than at the top of the file so that requiring
+      # chef-gyoku does not pull in REXML. Only the :pretty_print option
+      # reaches this method, and REXML is by far the largest cost of
+      # loading this library.
+      require "rexml/document" unless defined?(REXML::Document)
+
       result = ""
       formatter = REXML::Formatters::Pretty.new indent
       formatter.compact = compact
