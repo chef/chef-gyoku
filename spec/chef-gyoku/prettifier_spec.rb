@@ -1,3 +1,10 @@
+# Gyoku::Prettifier requires REXML lazily so that requiring chef-gyoku stays
+# cheap, which means the REXML constants do not exist until #prettify runs.
+# The raise_error matcher below resolves REXML::ParseException while it is
+# being built, before the block executes, so this file has to load REXML
+# itself rather than relying on another example having run first.
+require "rexml/document"
+
 RSpec.describe Gyoku::Prettifier do
   subject { described_class.new(options) }
 
