@@ -151,4 +151,4 @@ Feature: [#17](https://github.com/savonrb/gyoku/pull/17) adds an `:upcase` formu
 ## 0.1.0
 
 * Initial version. Gyoku was born as a core extension inside the
-  [Savon](http://rubygems.org/gems/savon) library.
+  [Savon](https://rubygems.org/gems/savon) library.
