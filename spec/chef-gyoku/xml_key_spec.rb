@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe Gyoku::XMLKey do
+RSpec.describe Gyoku::XMLKey do
   describe ".create" do
     it "removes exclamation marks from the end of a String" do
       expect(create("value!")).to eq("value")
@@ -20,7 +18,7 @@ describe Gyoku::XMLKey do
     end
 
     context "when the converter option is set to camelcase" do
-      it "should replace / with ::, and turn snake case into camel case" do
+      it "replaces / with :: and turns snake case into camel case" do
         input = :"hello_world_bob/how_are_you|there:foo^bar"
         expected_output = "HelloWorldBob::HowAreYou|there:foo^bar"
         expect(create(input, { key_converter: :camelcase })).to eq(expected_output)
@@ -32,13 +30,13 @@ describe Gyoku::XMLKey do
         expect(create(:some_text, { key_converter: lambda(&:reverse) })).to eq("txet_emos")
       end
 
-      it "convert symbol to the specified type" do
+      it "converts a Symbol using the specified converter" do
         expect(create(:some_text, { key_converter: :camelcase })).to eq("SomeText")
         expect(create(:some_text, { key_converter: :upcase })).to eq("SOME_TEXT")
         expect(create(:some_text, { key_converter: :none })).to eq("some_text")
       end
 
-      it "when key_to_convert is defined, convert only this key" do
+      it "converts only the key named by key_to_convert" do
         options = { key_converter: :camelcase, key_to_convert: "somekey" }
         expect(create(:some_key, options)).to eq("someKey")
 
@@ -46,7 +44,7 @@ describe Gyoku::XMLKey do
         expect(create(:some_key, options)).to eq("SomeKey")
       end
 
-      it "when except is defined, dont convert this key" do
+      it "does not convert a key listed in except" do
         options = { key_converter: :camelcase, except: "some_key" }
         expect(create(:some_key, options)).to eq("someKey")
       end

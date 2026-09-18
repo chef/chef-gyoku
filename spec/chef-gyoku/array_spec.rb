@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe Gyoku::Array do
+RSpec.describe Gyoku::Array do
   describe ".to_xml" do
     it "returns the XML for an Array of Hashes" do
       array = [{ name: "adam" }, { name: "eve" }]
